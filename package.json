@@ -6,7 +6,7 @@
   "dependencies": {
     "ws": "^0.7.2",
     "finalhandler": "^0.3.6",
-    "serve-static": "^1.9.3
+    "serve-static": "^1.9.3"
   },
   "devDependencies": {},
   "scripts": {
