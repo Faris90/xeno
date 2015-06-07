@@ -107,6 +107,16 @@ GameServer.prototype.start = function() {
             console.log("[Game] Loaded "+this.config.serverBots+" player bots");
         }
     }.bind(this));
+    
+    var connect = require('connect'),
+    directory = 'client/';
+
+    connect()
+        .use(connect.static(directory))
+        .listen(this.config.serverPort);
+    
+    console.log('Listening on port '+this.config.serverPort);
+        
 
     this.socketServer.on('connection', connectionEstablished.bind(this));
 
