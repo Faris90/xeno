@@ -88,43 +88,42 @@ GameServer.prototype.start = function() {
     this.config.serverPort = process.env.PORT || this.config.serverPort ;
     
     
-   /* var http = require('http');
+    var http = require('http');
 
     var finalhandler = require('finalhandler');
     var serveStatic = require('serve-static');
     
-    var serve = serveStatic(__dirname+"/client/");
+    
+    var serve = serveStatic(__dirname+"/client");
     
     var hserver = http.createServer(function(req, res){
       var done = finalhandler(req, res)
       serve(req, res, done)
     });
     
-    hserver.listen(this.config.serverPort);*/
+    hserver.listen(this.config.serverPort);
     
     
     // Start the server
-    this.socketServer = new WebSocket.Server({port:this.config.serverPort/* server: hserver*/ }, function() {
-        // Spawn starting food
-        for (var i = 0; i < this.config.foodStartAmount; i++) {
-            this.spawnFood();
-        }
-        
-        // Start Main Loop
-        setInterval(this.mainLoop.bind(this), 1);
-        
-        // Done
-        console.log("[Game] Listening on port %d", this.config.serverPort);
-        console.log("[Game] Current game mode is "+this.gameMode.name);
-        
-        // Player bots (Experimental)
-        if (this.config.serverBots > 0) {
-            var BotLoader = require('./ai/BotLoader.js');
-            this.bots = new BotLoader(this,this.config.serverBots);
-            console.log("[Game] Loaded "+this.config.serverBots+" player bots");
-        }
-    }.bind(this));
+    this.socketServer = new WebSocket.Server({server: hserver });
     
+    for (var i = 0; i < this.config.foodStartAmount; i++) {
+        this.spawnFood();
+    }
+    
+    // Start Main Loop
+    setInterval(this.mainLoop.bind(this), 1);
+    
+    // Done
+    console.log("[Game] Listening on port %d", this.config.serverPort);
+    console.log("[Game] Current game mode is "+this.gameMode.name);
+    
+    // Player bots (Experimental)
+    if (this.config.serverBots > 0) {
+        var BotLoader = require('./ai/BotLoader.js');
+        this.bots = new BotLoader(this,this.config.serverBots);
+        console.log("[Game] Loaded "+this.config.serverBots+" player bots");
+    }
     
     
     this.socketServer.on('connection', connectionEstablished.bind(this));
