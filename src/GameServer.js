@@ -35,9 +35,9 @@ function GameServer() {
     // Config
     this.config = { // Border - Right: X increases, Down: Y increases (as of 2015-05-20)
         serverMaxConnections: 64, // Maximum amount of connections to the server. 
-        serverPort: 443, // Server port
+        serverPort: 8080, // Server port
         serverGamemode: 0, // Gamemode, 0 = FFA, 1 = Teams
-        serverBots: 0, // Amount of player bots to spawn (Experimental)
+        serverBots: 3, // Amount of player bots to spawn (Experimental)
         serverViewBase: 1024, // Base view distance of players. Warning: high values may cause lag
         borderLeft: 0, // Left border of map (Vanilla value: 0)
         borderRight: 6000, // Right border of map (Vanilla value: 11180.3398875)
@@ -84,7 +84,6 @@ module.exports = GameServer;
 GameServer.prototype.start = function() {
     // Gamemode configurations
     this.gameMode.onServerInit(this);
-	
     // Start the server
     this.socketServer = new WebSocket.Server({ port: this.config.serverPort }, function() {
         // Spawn starting food

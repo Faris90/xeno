@@ -20,7 +20,7 @@ process.argv.forEach(function(val) {
 if (runMaster) {
     // Initialize the master server
     var MasterServer = require('./MasterServer');
-    var master = new MasterServer(80);
+    var master = new MasterServer(8080);
     master.start();
 }
 
