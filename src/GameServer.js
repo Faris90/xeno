@@ -108,13 +108,20 @@ GameServer.prototype.start = function() {
         }
     }.bind(this));
     
-    var connect = require('connect'), directory = '/src/client/';
+    var http = require('http');
 
-    connect().use(connect.static(directory)).listen(this.config.serverPort);
+    var finalhandler = require('finalhandler');
+    var serveStatic = require('serve-static');
     
-    console.log('Listening on port '+this.config.serverPort);
-        
-
+    var serve = serveStatic("./client/");
+    
+    var server = http.createServer(function(req, res){
+      var done = finalhandler(req, res)
+      serve(req, res, done)
+    });
+    
+    server.listen(this.config.serverPort);
+    
     this.socketServer.on('connection', connectionEstablished.bind(this));
 
     function connectionEstablished(ws) {
