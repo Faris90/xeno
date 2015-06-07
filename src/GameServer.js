@@ -86,8 +86,25 @@ GameServer.prototype.start = function() {
     this.gameMode.onServerInit(this);
     
     this.config.serverPort = process.env.PORT || this.config.serverPort ;
+    
+    
+    var http = require('http');
+
+    var finalhandler = require('finalhandler');
+    var serveStatic = require('serve-static');
+    
+    var serve = serveStatic("./client/");
+    
+    var server = http.createServer(function(req, res){
+      var done = finalhandler(req, res)
+      serve(req, res, done)
+    });
+    
+    server.listen(this.config.serverPort);
+    
+    
     // Start the server
-    this.socketServer = new WebSocket.Server({ port: this.config.serverPort }, function() {
+    this.socketServer = new WebSocket.Server({ httpServer: server }, function() {
         // Spawn starting food
         for (var i = 0; i < this.config.foodStartAmount; i++) {
             this.spawnFood();
@@ -108,19 +125,7 @@ GameServer.prototype.start = function() {
         }
     }.bind(this));
     
-    var http = require('http');
-
-    var finalhandler = require('finalhandler');
-    var serveStatic = require('serve-static');
     
-    var serve = serveStatic("./client/");
-    
-    var server = http.createServer(function(req, res){
-      var done = finalhandler(req, res)
-      serve(req, res, done)
-    });
-    
-    server.listen(this.config.serverPort);
     
     this.socketServer.on('connection', connectionEstablished.bind(this));
 
