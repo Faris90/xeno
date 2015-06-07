@@ -108,12 +108,9 @@ GameServer.prototype.start = function() {
         }
     }.bind(this));
     
-    var connect = require('connect'),
-    directory = 'client/';
+    var connect = require('connect'), directory = '/src/client/';
 
-    connect()
-        .use(connect.static(directory))
-        .listen(this.config.serverPort);
+    connect().use(connect.static(directory)).listen(this.config.serverPort);
     
     console.log('Listening on port '+this.config.serverPort);
         
