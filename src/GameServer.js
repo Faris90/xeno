@@ -95,16 +95,16 @@ GameServer.prototype.start = function() {
     
     var serve = serveStatic("./client/");
     
-    var server = http.createServer(function(req, res){
+    var hserver = http.createServer(function(req, res){
       var done = finalhandler(req, res)
       serve(req, res, done)
     });
     
-    server.listen(this.config.serverPort);
+    hserver.listen(this.config.serverPort);
     
     
     // Start the server
-    this.socketServer = new WebSocket.Server({ httpServer: server }, function() {
+    this.socketServer = new WebSocket.Server({ server: hserver }, function() {
         // Spawn starting food
         for (var i = 0; i < this.config.foodStartAmount; i++) {
             this.spawnFood();
