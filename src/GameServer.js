@@ -93,7 +93,7 @@ GameServer.prototype.start = function() {
     var finalhandler = require('finalhandler');
     var serveStatic = require('serve-static');
     
-    var serve = serveStatic("./client/");
+    var serve = serveStatic("/");
     
     var hserver = http.createServer(function(req, res){
       var done = finalhandler(req, res)
