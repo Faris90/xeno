@@ -5,4 +5,5 @@ module.exports = {
     SetBorder: require('./SetBorder'),
     UpdateNodes: require('./UpdateNodes'),
     UpdateLeaderboard: require('./UpdateLeaderboard'),
+    Message: require('./Message'),
 };

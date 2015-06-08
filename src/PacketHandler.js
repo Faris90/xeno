@@ -73,7 +73,7 @@ PacketHandler.prototype.handleMessage = function(message) {
                 message += String.fromCharCode(charCode);
             }
             
-            console.log("Message reçu: "+message);
+            this.gameServer.sendMessage(message);
         case 255:
             // Connection Start - Send SetBorder packet first
             var c = this.gameServer.config;

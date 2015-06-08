@@ -246,6 +246,23 @@
                 c += 2;
                 qa || (qa = !0, $ = oa, aa = pa);
                 break;
+            case 42:
+                var chat = document.getElementById("chatbox");
+                chat.scrollTop = chat.scrollHeight;
+                
+                var message = "";
+                for (var i = 1; i < d.byteLength; i += 2) {
+                    var charCode = d.getUint16(i, true);
+                    if (charCode == 0) {
+                        break;
+                    }
+    
+                    message += String.fromCharCode(charCode);
+                }
+            
+            
+                chat.value += "\n "+message;
+                break;
             case 32:
                 E.push(d.getUint32(c, !0));
                 c += 4;

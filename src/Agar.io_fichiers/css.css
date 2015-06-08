@@ -6,10 +6,24 @@
 }
 
 #chatinput {
-  width: calc(100% - 163px); position: absolute; bottom: 13px; left: 150px; opacity: 0.42;
+  width: 500px; position: absolute; bottom: 13px; right: 13px; opacity: 0.42;
 }
 
 #chatinput:focus {
    opacity: 0.90;
   
+}
+
+#chatbox {
+  position: absolute;
+  right: 13px;
+  width: 500px;
+  height: 200px;
+  bottom: 45px;
+  opacity: 0.5;
+}
+
+#chatbox:focus {
+  opacity: 0.90;
+  height: 42%;
 }

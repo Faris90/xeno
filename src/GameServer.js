@@ -283,6 +283,15 @@ GameServer.prototype.mainLoop = function() {
     }
 }
 
+GameServer.prototype.sendMessage = function(msg) {
+    for (var i = 0; i < this.clients.length; i++) {
+        if (typeof this.clients[i] == "undefined") {
+            continue;
+        }
+
+        this.clients[i].playerTracker.socket.sendPacket(new Packet.Message(msg));
+    }
+}
 
 GameServer.prototype.updateClients = function() {
     for (var i = 0; i < this.clients.length; i++) {
