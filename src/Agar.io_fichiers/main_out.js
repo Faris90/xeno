@@ -371,12 +371,17 @@
     
     function sendMessage(text) {
         if (sa() && null != text) {
-            var a = new ArrayBuffer(1 + 2 * text.length),
+            var name = D || "An unnamed cell";
+            
+            var denvoi = new Date();
+            
+            var msg = "["+denvoi.toLocaleTimeString() +"] "+name+": "+text;
+            
+            var a = new ArrayBuffer(1 + 2 * msg.length),
                 b = new DataView(a);
             b.setUint8(0, 42);
-            for (var c = 0; c < text.length; ++c) b.setUint16(1 +
-                2 * c, text.charCodeAt(c), !0);
-        console.log("message:"+text);
+            for (var c = 0; c < msg.length; ++c) b.setUint16(1 +
+                2 * c, msg.charCodeAt(c), !0);
             m.send(a);
         }
     }
