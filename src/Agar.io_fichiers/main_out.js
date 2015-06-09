@@ -49,16 +49,18 @@
             b = !1,
             c = !1;
         f.onkeydown = function(d) {
-            32 != d.keyCode || a || (K(), B(17), a = !0);
-            81 != d.keyCode || b || (B(18), b = !0);
-            87 != d.keyCode || c || (K(), B(21), c = !0);
-            27 == d.keyCode && Aa(!0)
+            if(chatinput != document.activeElement) {
+                32 != d.keyCode || a || (K(), B(17), a = !0);
+                81 != d.keyCode || b || (B(18), b = !0);
+                87 != d.keyCode || c || (K(), B(21), c = !0);
+                27 == d.keyCode && Aa(!0)
+            }
         };
         f.onkeyup = function(d) {
             32 == d.keyCode && (a = !1);
             87 == d.keyCode && (c = !1);
             81 == d.keyCode && b && (B(19), b = !1);
-            if(d.keyCode == 67) {
+            if(d.keyCode == 67 && document.getElementById("overlays").style.display == "none") {
                 chatinput.focus();
             }
         };
