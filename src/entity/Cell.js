@@ -197,14 +197,14 @@ Cell.prototype.calcMove = function(x2, y2, gameServer) {
                 // Calculations
                 if (dist < collisionDist) { // Collided
                     // The moving cell pushes the colliding cell
-                    var newDeltaY = check.position.y - y1;
+                /*    var newDeltaY = check.position.y - y1;
                     var newDeltaX = check.position.x - x1;
                     var newAngle = Math.atan2(newDeltaX,newDeltaY);
                     
                     var move = collisionDist - dist;
                     
                     check.position.x = check.position.x + ( move * Math.sin(newAngle) ) >> 0;
-                    check.position.y = check.position.y + ( move * Math.cos(newAngle) ) >> 0;
+                    check.position.y = check.position.y + ( move * Math.cos(newAngle) ) >> 0; */
                 }
             }
         }
